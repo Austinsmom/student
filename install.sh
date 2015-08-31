@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 USERNAME='root'
-PASSWORD=''
+PASSWORD='antoine'
 DBNAME='ecole'
 HOST='localhost'
 
