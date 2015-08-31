@@ -8,6 +8,14 @@ create table students
 php artisan make:migration create_students_table --create=students
 
 ``
+commit migration or rollback or refresh rollback and commit
+
+``
+php artisan migrate
+php artisan migrate:rollback
+php artisan migrate:refresh
+``
+
 
 ### Commands MySQL
 
