@@ -4,7 +4,7 @@
 
 create table students
 
-``php
+`` php
 php artisan make:migration create_students_table --create=students
 
 ``
@@ -13,7 +13,13 @@ php artisan make:migration create_students_table --create=students
 
 - connect to database ecole
 
-``mysql
+`` mysql
+mysql --user=tony --password=tony
+mysql> use ecole;
+
 mysql --user=tony --password=tony --database ecole
+
+show create table students
+
 
 ``
