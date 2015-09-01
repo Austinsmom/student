@@ -13,13 +13,19 @@ class StudentController extends Controller
 
     public function show()
     {
-        return Student::all();
+        $students = Student::all();
+
+//        dd($students);
+
+        return view('student.index', compact('students'));
 
     }
 
     public function showStudent($id)
     {
-        return view('student', ['id' => $id]);
+        $student = Student::find($id);
+
+        return view('student.single', compact('student'));
     }
 
 }
