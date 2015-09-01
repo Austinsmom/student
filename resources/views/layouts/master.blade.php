@@ -12,7 +12,7 @@
 
 <div class="sidebar">
     @section('sidebar')
-        this is the master sidebar
+        <h2>this is the master sidebar</h2>
     @show
 </div>
 </body>
