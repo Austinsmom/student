@@ -105,3 +105,29 @@ And test route into console with curl
 curl http://localhost:8000/tag
 
 ```
+
+List route
+
+search command artisan route
+
+```php
+php artisan list | grep route
+
+```
+
+And use route list
+
+```php
+php artisan route:list
+
+```
+Part of sass
+
+install node
+
+```bash
+npm install --global gulp
+npm install gulp --save-dev
+npm install gulp-sass gulp-rename gulp-minify-css gulp-concat --save-dev
+
+```

@@ -11,7 +11,7 @@
 @section('content')
 <ul>
 @foreach($students as $student)
-    <li>{{ $student->username }}</li>
+    <li><a href="{{url('student', $student->id)}}">{{ $student->username }}</a></li>
 @endforeach
 </ul>
 @endsection

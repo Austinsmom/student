@@ -10,8 +10,18 @@ use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
-    public function index()
+    public function show()
     {
-        return Tag::all();
+        $tags = Tag::all();
+
+        return view('tag.index', compact('tags'));
     }
+
+    public function showTag($id)
+    {
+        $tag = Tag::find($id);
+
+        return view('tag.single', compact('tag'));
+    }
+
 }

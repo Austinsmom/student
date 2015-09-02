@@ -4,7 +4,7 @@
 </head>
 <body>
 <div class="header">
-
+    @include('partials.main_menu')
 </div>
 <div class="container">
     @yield('content', 'default value')

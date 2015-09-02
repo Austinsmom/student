@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
 Route::get('student', 'StudentController@show');
 Route::get('student/{id}', 'StudentController@showStudent');
 
-Route::get('tag', 'TagController@index');
+Route::get('tag', 'TagController@show');
+Route::get('tag/{id}', 'TagController@showTag');
