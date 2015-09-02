@@ -114,7 +114,6 @@ search command artisan route
 php artisan list | grep route
 
 ```
-
 And use route list
 
 ```php
@@ -130,4 +129,9 @@ npm install --global gulp
 npm install gulp --save-dev
 npm install gulp-sass gulp-rename gulp-minify-css gulp-concat --save-dev
 
+```
+tool bar laravel
+
+```php
+composer require barryvdh/laravel-debugbar
 ```
