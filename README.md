@@ -135,3 +135,15 @@ tool bar laravel
 ```php
 composer require barryvdh/laravel-debugbar
 ```
+
+Provider config/app.php
+
+```php
+    'providers'
+    'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+```
+
+link tool bar:
+
+https://github.com/barryvdh/laravel-debugbar
