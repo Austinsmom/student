@@ -11,10 +11,16 @@
 @endsection
 
 @section('content')
+<article>
 @if(!empty($student))
+    <section>
     <h2>{{$student->username}}</h2>
     <p>{{$student->email}}</p>
+    </section>
 @else
+    <section>
     <p>Désolé pas de student</p>
+    </section>
 @endif
+</article>
 @endsection

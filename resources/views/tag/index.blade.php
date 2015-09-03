@@ -9,9 +9,13 @@
 @endsection
 
 @section('content')
+<artilce>
+<section>
 <ul>
 @foreach($tags as $tag)
     <li><a href="{{url('tag', $tag->id)}}">{{ $tag->name }}</a></li>
 @endforeach
 </ul>
+</section>
+</artilce>
 @endsection

@@ -26,7 +26,7 @@
 
 <div class="header-container">
     <header class="wrapper clearfix">
-        <h1 class="title">h1.title</h1>
+        <h1 class="title"><a href="{{url('/')}}">Students</a></h1>
         <nav>
             @include('partials.main_menu')
         </nav>

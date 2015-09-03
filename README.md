@@ -164,17 +164,83 @@ INSERT INTO posts (title, category_id) values ('foo', 1), ('bar', 1), ('baz', 1)
 INSERT INTO posts SET title='foo';
 ```
 
-### component for artisan
+### commands SQL
+
+```mysql
+#connect to specific database with hidden password
+mysql -u tony -p --database school
+
+# sql to create specific table or database
+mysql>show create table posts;
+mysql>show create database school;
+
+# structure table
+mysql>describe posts;
+
+```
+### require laracast
 
 ```json
-    "require" :{
-        "way/generators": "~2.0"
+    "require-dev" :{
+        "laracasts/generators": "^1.1"
     }
 
 ```
 After we can do
 
- ```php
-     php artisan generate:migration create_users_table --fields="email:string:unique, password:string(20)"
+```php
+ php artisan generate:migration create_comments_table --fields="email:string, content:text, post_id:integer:unsigned:foreign"
 
- ```
+```
+
+### faker and seeds
+
+```php
+ php artisan make:seeder UserTableSeeder
+
+```
+
+file ModelFactory => data faker
+
+```php
+$factory->define(App\User::class, function (Faker\Generator $faker) {
+  return [
+      'name' => $faker->name,
+      'email' => $faker->email,
+      'password' => bcrypt(str_random(10)),
+      'remember_token' => str_random(10),
+  ];
+});
+```
+
+inside file UserTableSeeder specified a number of data you want
+
+```php
+use Illuminate\Database\Seeder;
+
+class UserTableSeeder extends Seeder
+{
+   /**
+    * Run the database seeds.
+    *
+    * @return void
+    */
+   public function run()
+   {
+       // définit dans le fichier ModelFactory dans le dossier database voir
+       factory(App\User::class, 20)->create();
+   }
+}
+```
+
+### TP
+
+Ajouter des posts et des commentaires liés à des posts, afficher le nombre de commentaire sous chaque post. Aidez-vous de la documentation en ligne:
+
+http://laravel.com/docs/5.1/eloquent
+
+Example
+```php
+$count = App\Flight::where('active', 1)->count();
+```
+

@@ -9,9 +9,10 @@
 @endsection
 
 @section('content')
-<ul>
+<article>
 @foreach($students as $student)
-    <li><a href="{{url('student', $student->id)}}">{{ $student->username }}</a></li>
+   <section><a href="{{url('student', $student->id)}}">{{ $student->username }}</a></section>
 @endforeach
+</article>
 </ul>
 @endsection

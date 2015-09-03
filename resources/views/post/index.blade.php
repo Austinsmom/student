@@ -12,7 +12,7 @@
 <article>
 @forelse($posts as $post)
 <section>
-<h2>{{$post->title}}
+<h2><a href="{{url('post', $post->id)}}">{{$post->title}}</a>
 <br> category name: {{ $post->category? $post->category->title : 'no category' }}</h2>
 </section>
 @empty

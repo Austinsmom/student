@@ -11,9 +11,13 @@
 @endsection
 
 @section('content')
+<article>
+    <section>
 @if(!empty($tag))
     <h2>{{$tag->name}}</h2>
 @else
     <p>Désolé pas de tag</p>
 @endif
+    </section>
+</article>
 @endsection

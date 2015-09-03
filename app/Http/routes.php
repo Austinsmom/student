@@ -11,11 +11,7 @@
 |
 */
 
-use App\Category;
-
-Route::get('/', function () {
-    return view('home.index');
-});
+Route::get('/', 'HomeController@show');
 
 Route::get('student', 'StudentController@show');
 Route::get('student/{id}', 'StudentController@showStudent');
@@ -30,8 +26,12 @@ Route::get('tag/{id}', 'TagController@showTag');
 
 Route::get('post', 'PostController@show');
 
+// afficher un post en particulier
+Route::get('post/{id}', 'PostController@showPost');
+
+// main menu pour afficher les articles d'une catégorie
 Route::get('category/{id}', 'PostController@showPostByCategory');
 
-Route::get('test', function(){
+Route::get('test', function () {
     return Category::find(2)->posts;
 });
