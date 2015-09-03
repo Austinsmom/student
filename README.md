@@ -244,3 +244,4 @@ Example
 $count = App\Flight::where('active', 1)->count();
 ```
 
+Si vous avez le temps afficher les commentaires sous chaque post une fois que l'on a cliqué sur un post
