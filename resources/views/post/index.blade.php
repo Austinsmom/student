@@ -9,12 +9,17 @@
 @endsection
 
 @section('content')
-    <ul>
-        @forelse($posts as $post)
-            <li>{{$post->title}}
-            <br> category name: {{ $post->category? $post->category->title : 'no category' }} </li>
-        @empty
-        <p>No post</p>
-        @endforelse
-    </ul>
+<article>
+@forelse($posts as $post)
+<section>
+<h2>{{$post->title}}
+<br> category name: {{ $post->category? $post->category->title : 'no category' }}</h2>
+</section>
+@empty
+<section>
+    <p>désolé pas d'article</p>
+</section>
+@endforelse
+
+</article>
 @endsection
