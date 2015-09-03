@@ -11,6 +11,8 @@
 |
 */
 
+use App\Category;
+
 Route::get('/', function () {
     return view('home.index');
 });
@@ -20,3 +22,16 @@ Route::get('student/{id}', 'StudentController@showStudent');
 
 Route::get('tag', 'TagController@show');
 Route::get('tag/{id}', 'TagController@showTag');
+
+
+/* ------------------------------------------------- *\
+    routes post controller
+\* ------------------------------------------------- */
+
+Route::get('post', 'PostController@show');
+
+Route::get('category/{id}', 'PostController@showPostByCategory');
+
+Route::get('test', function(){
+    return Category::find(2)->posts;
+});

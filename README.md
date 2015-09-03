@@ -143,7 +143,38 @@ Provider config/app.php
     'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
 ```
-
 link tool bar:
 
 https://github.com/barryvdh/laravel-debugbar
+
+### Eloquent relationships
+
+first connect to database ecole with password and without password
+
+```bash
+mysql --user=tony --password=tony --database ecole
+mysql --u tony -p --database ecole
+```
+Examples SQL insert
+
+multiple values or single value
+
+```mysql
+INSERT INTO posts (title, category_id) values ('foo', 1), ('bar', 1), ('baz', 1);
+INSERT INTO posts SET title='foo';
+```
+
+### component for artisan
+
+```json
+    "require" :{
+        "way/generators": "~2.0"
+    }
+
+```
+After we can do
+
+ ```php
+     php artisan generate:migration create_users_table --fields="email:string:unique, password:string(20)"
+
+ ```
