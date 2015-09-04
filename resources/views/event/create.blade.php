@@ -1,6 +1,11 @@
-<form action="{{url('event')}}" method="post">
-    <input type="text"  name="name"/>
-
-    {!! csrf_field() !!}
-    <input type="submit"/>
-</form>
+{!! Form::open(['url'=>'event']) !!}
+<p>
+{!! Form::label('name', 'Name:', ['for'=>'name']) !!}
+{!! Form::text('name', old('name'), ['id'=>'name'] ) !!}
+</p>
+<p>
+{!! Form::label('email', 'Email:', ['for'=>'email']) !!}
+{!! Form::email('email') !!}
+</p>
+{!! Form::submit('create') !!}
+{!! Form::close() !!}
