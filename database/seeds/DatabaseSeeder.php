@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         // dans quel ordre faire les seeders
         $this->call(UserTableSeeder::class);
+        $this->call(PostTableSeeder::class);
 
         Model::reguard();
     }

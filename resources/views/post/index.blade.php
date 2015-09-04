@@ -14,6 +14,7 @@
 <section>
 <h2><a href="{{url('post', $post->id)}}">{{$post->title}}</a>
 <br> category name: {{ $post->category? $post->category->title : 'no category' }}</h2>
+    <p>Number comment: {{$post->comments? $post->comments->count(): 0}}</p>
 </section>
 @empty
 <section>
