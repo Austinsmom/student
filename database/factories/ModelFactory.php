@@ -29,6 +29,6 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Event::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word(3),
+        'name' => $faker->word(),
     ];
 });

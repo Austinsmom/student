@@ -243,10 +243,54 @@ Example
 ```php
 $count = App\Flight::where('active', 1)->count();
 ```
-
 Si vous avez le temps afficher les commentaires sous chaque post une fois que l'on a cliqué sur un post
-
 
 ### CRUD
 
 CRUD create read update delete
+
+### Controller resource
+
+- controller and resource
+
+```bash
+#create controller resource
+$ php artisan make:controller EventController
+
+#create resource event with Event and seeder
+$ php artisan make:migration:schema create_events_table --schema="name:string"
+$ php artisan make:seeder EventTableSeeder
+# see databases/seeds/EventTableSeeder.php and factories/ModelFactory.php
+$ php artisan migrate --seed
+```
+
+- routes.php connect EventController to REST routes:
+
+```bash
+
+Route::resource('event', 'EventController');
+
+```
+
+- all application routes student:
+
+ ```bash
+
+ $ php artisan route:list
+
+```
+
+- use Curl testing routes REST
+
+```bash
+
+# verb get method EventController::index
+
+curl -i  http://localhost:8000/event
+
+# verb post  EventController::store
+# disable into Kernel.php csrf protection... => token
+
+curl -i -X POST -d 'name=foo' http://localhost:8000/event
+
+```

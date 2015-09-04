@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Event;
+
 class EventController extends Controller
 {
     /**
@@ -16,7 +18,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        return "index";
+        $events = Event::all();
+
+        return view('event.index', compact('events'));
     }
 
     /**
@@ -26,35 +30,37 @@ class EventController extends Controller
      */
     public function create()
     {
-        return "create";
+        return view('event.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
     {
-        return $request->all();
+        Event::create($request->all()) ;
+
+        return redirect()->to('event')->with('message','success');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
     {
-        //
+        return Event::find($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -65,8 +71,8 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -77,11 +83,12 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
-        //
+        Event::destroy($id);
+
     }
 }
