@@ -35,3 +35,10 @@ Route::get('category/{id}', 'PostController@showPostByCategory');
 Route::get('test', function () {
     return Category::find(2)->posts;
 });
+
+
+/* ------------------------------------------------- *\
+    REST Controller event
+\* ------------------------------------------------- */
+
+Route::resource('event', 'EventController');

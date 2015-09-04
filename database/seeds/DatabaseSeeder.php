@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         // dans quel ordre faire les seeders
         $this->call(UserTableSeeder::class);
         $this->call(PostTableSeeder::class);
+        $this->call(EventTableSeeder::class);
 
         Model::reguard();
     }
