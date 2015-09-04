@@ -41,9 +41,9 @@ class EventController extends Controller
      */
     public function store(Requests\EventRequest $request)
     {
-        Event::create($request->all()) ;
+        Event::create($request->all());
 
-        return redirect()->to('event')->with('message','success');
+        return redirect()->to('event')->with('message', 'success');
     }
 
     /**
@@ -65,7 +65,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+
+        return view('event.edit', compact('event'));
     }
 
     /**

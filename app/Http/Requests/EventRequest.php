@@ -6,6 +6,15 @@ use App\Http\Requests\Request;
 
 class EventRequest extends Request
 {
+
+    public function messages()
+    {
+        return [
+            'required' => 'Ce champ :attribute est obligatoire',
+            'email'    => 'Mauvaise syntaxe d\'email ',
+        ];
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +33,7 @@ class EventRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name'  => 'required',
             'email' => 'required|email'
         ];
     }
