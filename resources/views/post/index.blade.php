@@ -1,9 +1,15 @@
 @extends('layouts.master_admin')
 
 @section('content')
+
+    <div class="add_post">
+        <button class="btn btn-default" type="submit"><a href="{{url('admin/post/create')}}">Add post</a></button>
+    </div>
+
     <div class="pagination">
         {!!$posts->render()!!}
     </div>
+
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
