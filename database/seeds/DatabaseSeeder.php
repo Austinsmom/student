@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         // dans quel ordre faire les seeders
         $this->call(UserTableSeeder::class);
+        $this->call(CategoryTableSeeder::class);
         $this->call(PostTableSeeder::class);
         $this->call(EventTableSeeder::class);
+        $this->call(StudentTableSeeder::class);
 
         Model::reguard();
     }

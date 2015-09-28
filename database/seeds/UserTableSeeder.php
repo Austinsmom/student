@@ -13,5 +13,12 @@ class UserTableSeeder extends Seeder
     {
         // définit dans le fichier ModelFactory dans le dossier database voir
         factory(App\User::class, 20)->create();
+
+
+        DB::table('users')->insert([
+            'name'     => 'Tony',
+            'email'    => 'tony@tony.fr',
+            'password' => Hash::make('Tony'),
+        ]);
     }
 }
