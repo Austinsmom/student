@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <div class="admin">
+        <button class="btn btn-default" type="submit"><a href="{{url('dashboard')}}">Dashboard</a></button>
+    </div>
+
     <div class="add_post">
         <button class="btn btn-default" type="submit"><a href="{{url('admin/post/create')}}">Add post</a></button>
     </div>
