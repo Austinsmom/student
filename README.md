@@ -232,7 +232,84 @@ class UserTableSeeder extends Seeder
    }
 }
 ```
+Example create seeder Category without factory
 
+```bash
+
+php artisan make:seeder CategoryTableSeeder
+
+```
+
+```php
+
+use Illuminate\Database\Seeder;
+
+class CategoryTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('categories')->insert(
+            [
+                [
+                    'title' => 'php'
+                ],
+                [
+                    'title' => 'mysql'
+                ],
+            ]
+        );
+    }
+}
+
+// into DatabaseSeeder.php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Model::unguard();
+        // dans quel ordre faire les seeders
+        $this->call(UserTableSeeder::class);
+        $this->call(CategoryTableSeeder::class);
+        $this->call(PostTableSeeder::class);
+        $this->call(EventTableSeeder::class);
+
+        Model::reguard();
+    }
+}
+
+```
+And factory ModelFactory.php
+```php
+$factory->define(App\Post::class, function (Faker\Generator $faker) {
+    return [
+        'title'       => $faker->word(1),
+        'content'     => $faker->paragraph(3),
+        'category_id' => rand(1, 2)
+    ];
+});
+
+```
+don't forget refresh and make seeder
+
+```bash
+
+php artisan migrate:refresh --seed
+
+```
 ### TP
 
 Ajouter des posts et des commentaires liés à des posts, afficher le nombre de commentaire sous chaque post. Aidez-vous de la documentation en ligne:
@@ -294,3 +371,101 @@ curl -i  http://localhost:8000/event
 curl -i -X POST -d 'name=foo' http://localhost:8000/event
 
 ```
+
+# relations classes
+
+- Composition
+
+```php
+
+class Connexion
+{
+
+}
+
+// composition hard coding
+class Model
+{
+	protected $c;
+
+	public function __construct()
+	{
+		$this->c = new Connexion;
+	}
+}
+
+// injection dependency
+class Model2
+{
+	protected $c;
+
+	public function __construct(Connexion $c)
+	{
+		$this->c = $c;
+	}
+}
+
+$model2 = new Model2(new Connexion);
+
+```
+
+// Dependency injection and interface segregation
+
+
+```php
+
+interfaces IConnexion{
+	function link(); // method public
+}
+
+
+class MySQLConnexion implements IConnexion
+{
+	public function link()
+	{
+
+	}
+}
+
+class ElasticSearchConnexion implements IConnexion
+{
+	public function link()
+	{
+
+	}
+}
+
+class Model
+{
+	protected $c;
+
+	public function __construct()
+	{
+		$this->c = new Connexion;
+	}
+
+	public function all()
+	{
+		$link = $this->c->link();
+	}
+}
+
+$model = new Model;
+
+class Model2
+{
+	protected $c;
+
+	public function __construct(IConnexion $c)
+	{
+		$this->c = $c;
+	}
+}
+
+// easy injection dependencies 
+$model2 = new Model2(new MySQLConnexion);
+
+$model3 = new Model2(new ElasticSearchConnexion);
+
+```
+
