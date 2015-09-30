@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Paris',
 
     /*
     |--------------------------------------------------------------------------
@@ -145,6 +145,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\MyHtmlServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
     ],
@@ -197,6 +198,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
+        'MyHtml'   => App\Facades\MyHtml::class,
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
