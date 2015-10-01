@@ -462,10 +462,53 @@ class Model2
 	}
 }
 
-// easy injection dependencies 
+// easy injection dependencies
 $model2 = new Model2(new MySQLConnexion);
 
 $model3 = new Model2(new ElasticSearchConnexion);
 
 ```
+
+# Comments protection
+
+add akismet
+
+```bash
+    php composer require nickurt/laravel-akismet:dev-master
+```
+
+configure into your config/app.php
+
+```php
+
+    // provider
+
+    nickurt\Akismet\ServiceProvider::class,
+
+    // aliases
+        'Akismet'   => nickurt\Akismet\Facade::class,
+
+```
+
+And adapter this example into your owner application, i have add this part of code into my service provider (method boot)
+
+```php
+
+ Validator::extend('spam_email', function ($attribute, $value, $parameters) {
+
+            \Akismet::setCommentAuthorEmail($value);
+            if (\Akismet::isSpam()) {
+                return false;
+            }
+
+            return true;
+        });
+
+```
+
+
+
+
+
+
 

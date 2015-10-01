@@ -6,7 +6,7 @@
             {!! Form::open(['route'=>'admin.post.store', 'files' => true]) !!}
             <div class="form-group {{$errors->has('title')? 'has-error' : '' }}">
                 {!! Form::label('title', 'Title:', ['for'=> 'Title'] ) !!}<br>
-                {!! Form::text('title', old('title'), ['class'=>'form-control', 'id' => 'Title', 'required']) !!}
+                {!! Form::text('title', old('title'), ['class'=>'form-control', 'id' => 'Title']) !!}
                 {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
             </div>
             <div class="form-group {{$errors->has('content')? 'has-error' : '' }}">
