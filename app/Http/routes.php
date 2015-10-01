@@ -15,6 +15,8 @@
     Front
 \* ------------------------------------------------- */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'HomeController@show');
 
 Route::get('student', 'StudentController@show');
@@ -106,3 +108,26 @@ App::bind('jeep', function ($app) {
 });
 
 //var_dump(App::make('jeep')->getTypeEngine());
+
+
+/* ------------------------------------------------- *\
+    TEST send mail
+\* ------------------------------------------------- */
+
+Route::get('test', function () {
+
+    // resources/views/emails/email.blade.php
+    Mail::send('emails.email', ['name' => 'Tony'], function ($message) {
+        $message->from('hicode@hicode.fr', 'Laravel');
+        $message->to('antoine.lucsko@gmail.com')->cc('bar@example.com');
+    });
+
+});
+
+
+
+
+
+
+
+

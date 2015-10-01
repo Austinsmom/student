@@ -11,6 +11,5 @@ class CommentTableSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }

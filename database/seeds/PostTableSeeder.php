@@ -18,9 +18,15 @@ class PostTableSeeder extends Seeder
             $faker = \Faker\Factory::create(); // une instance de faker
             for ($i = 0; $i < rand(1, 10); $i++) {
 
-                $comment = new Comment(['email' => $faker->email, 'content' => $faker->paragraph(1), 'post_id' => $post->id, 'published_at' => Carbon::now()]);
+                $comment = new Comment([
+                    'email' => $faker->email,
+                    'content' => $faker->paragraph(1),
+                    'post_id' => $post->id,
+                    'published_at' => Carbon::now()
+                ]);
 
-                $post->comments()->save($comment);
+                $comment->save();
+
             }
 
         });

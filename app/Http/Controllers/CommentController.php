@@ -11,6 +11,12 @@ use App\Http\Requests;
 
 class CommentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,11 +45,12 @@ class CommentController extends Controller
      */
     public function store(CommentFormRequest $request)
     {
+
         $comment = Comment::create($request->all());
 
+        // service Aksimet checked content and email
         \Akismet::setCommentContent($request->input('content'))
-            ->setCommentAuthorEmail($request->input('email'))
-            ->setCommentAuthorUrl($request->url());
+            ->setCommentAuthorEmail($request->input('email'));
 
         if (\Akismet::isSpam()) {
             $comment->spam = 1;
