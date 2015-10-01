@@ -511,3 +511,15 @@ You can publish configuration into app/config like this
 php artisan vendor:publish
 
 ```
+into your akismet.php file (config/akismet.php) write your API KEY and url web site
+
+```php
+return [
+    'api_key'  => 'XXXXXXXX',
+    'blog_url' => 'http://localhost:8000',
+];
+
+```
+
+
+
