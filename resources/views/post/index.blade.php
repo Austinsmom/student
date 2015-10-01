@@ -35,7 +35,7 @@
                             href="{{url('admin/post/'.$post->id.'/edit')}}">{{$post->title}}</a></td>
                 <td>{{$post->category? $post->category->title : 'no category'}}</td>
                 <td>{{$post->published_at}} </td>
-                <td>{!! Form::open(['route'=>['admin.post',$post->id] , 'method'=>'DELETE', 'class'=>'form-delete']) !!}
+                <td>{!! Form::open(['route'=>['admin.post.destroy',$post->id] , 'method'=>'DELETE', 'class'=>'form-delete']) !!}
                     <div class="form-group">
                         {!! Form::submit('delete', ['class'=>'btn']) !!}
                     </div>

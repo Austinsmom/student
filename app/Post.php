@@ -12,7 +12,8 @@ class Post extends Model
         'content',
         'category_id',
         'published_at',
-        'status'
+        'status',
+        'comments_counts'
     ];
 
     public function category()

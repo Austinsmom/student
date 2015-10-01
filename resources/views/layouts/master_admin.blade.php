@@ -42,6 +42,6 @@
     </div>
 </div>
 <!-- content -->
-
+@yield('scripts')
 </body>
 </html>

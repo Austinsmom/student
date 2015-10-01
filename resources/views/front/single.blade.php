@@ -15,11 +15,7 @@
         <h2>{{$post->title}}</h2>
         {{$post->content}}
         <h2>Comments:</h2>
-        @forelse($post->comments as $c)
-            <p>{{$c->content}}</p>
-        @empty
-            <p>No comment</p>
-        @endforelse
+        @include('front.partials.comment')
     </section>
 @else
 <section>

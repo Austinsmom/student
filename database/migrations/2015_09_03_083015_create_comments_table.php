@@ -17,6 +17,8 @@ class CreateCommentsTable extends Migration
             $table->integer('post_id')->unsigned();
             $table->string('email');
             $table->text('content');
+            $table->boolean('spam')->default(false);
+            $table->timestamp('published_at');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('CASCADE');
             $table->timestamps();
         });

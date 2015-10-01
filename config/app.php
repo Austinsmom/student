@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug'           => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url'             => 'http://localhost',
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Paris',
+    'timezone'        => 'Europe/Paris',
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale'          => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,9 +78,9 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key'             => env('APP_KEY', 'SomeRandomString'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher'          => 'AES-256-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +95,7 @@ return [
     |
     */
 
-    'log' => 'single',
+    'log'             => 'single',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'providers' => [
+    'providers'       => [
 
         /*
          * Laravel Framework Service Providers...
@@ -148,6 +148,7 @@ return [
         App\Providers\MyHtmlServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
+        nickurt\Akismet\ServiceProvider::class,
     ],
 
     /*
@@ -161,7 +162,7 @@ return [
     |
     */
 
-    'aliases' => [
+    'aliases'         => [
 
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
@@ -198,9 +199,10 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
-        'MyHtml'   => App\Facades\MyHtml::class,
+        'MyHtml'    => App\Facades\MyHtml::class,
 
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'Akismet'   => nickurt\Akismet\Facade::class,
 
     ],
 

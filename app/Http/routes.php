@@ -11,34 +11,98 @@
 |
 */
 
+/* ------------------------------------------------- *\
+    Front
+\* ------------------------------------------------- */
+
 Route::get('/', 'HomeController@show');
 
 Route::get('student', 'StudentController@show');
 Route::get('student/{id}', 'StudentController@showStudent');
 
-Route::get('tag', 'TagController@show');
-Route::get('tag/{id}', 'TagController@showTag');
+//Route::get('tag', 'TagController@show');
+//Route::get('tag/{id}', 'TagController@showTag');
 
 
-/* ------------------------------------------------- *\
-    routes post controller
-\* ------------------------------------------------- */
+Route::get('post', 'FrontController@show');
 
-Route::get('post', 'PostController@show');
+// one post
+Route::get('post/{id}', 'FrontController@showPost');
 
-// afficher un post en particulier
-Route::get('post/{id}', 'PostController@showPost');
-
-// main menu pour afficher les articles d'une catégorie
-Route::get('category/{id}', 'PostController@showPostByCategory');
-
-Route::get('test', function () {
-    return Category::find(2)->posts;
-});
-
+// posts by category
+Route::get('category/{id}', 'FrontController@showPostByCategory');
 
 /* ------------------------------------------------- *\
     REST Controller event
 \* ------------------------------------------------- */
 
 Route::resource('event', 'EventController');
+Route::resource('tag', 'TagController');
+Route::resource('comment', 'CommentController');
+
+/* ------------------------------------------------- *\
+    Auth
+\* ------------------------------------------------- */
+
+Route::controller('auth', 'Auth\AuthController');
+
+/* ------------------------------------------------- *\
+    Dashboard
+\* ------------------------------------------------- */
+
+Route::get('dashboard', 'Admin\DashboardController@index');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('post', 'Admin\PostController');
+});
+
+/* ------------------------------------------------- *\
+    Container IoC example
+\* ------------------------------------------------- */
+
+class Jeep
+{
+    protected $engine;
+
+    public function __construct(Engine $e)
+    {
+        $this->engine = $e;
+    }
+
+    public function getTypeEngine()
+    {
+        return $this->engine->getType();
+    }
+}
+
+class Engine
+{
+    protected $type = 'electric';
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+}
+
+//IoC container
+
+App::bind('engine', function () {
+    return new Engine;
+});
+
+App::bind('jeep', function ($app) {
+
+    return new Jeep($app->make('engine'));
+});
+
+//var_dump(App::make('jeep')->getTypeEngine());

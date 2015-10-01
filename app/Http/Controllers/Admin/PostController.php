@@ -10,8 +10,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use \App\Post;
-
 use Form;
+use App\Http\Requests\PostFormRequest;
 
 class PostController extends Controller
 {
@@ -24,8 +24,13 @@ class PostController extends Controller
         $this->middleware('auth');
 
         // helper Form macro
-        Form::macro('published', function () {
-            return '<input class="form-control" type="date" name="published_at" value="' . Carbon::now()->toDateString() . '">';
+        Form::macro('published', function ($value = null) {
+
+            $date = $value;
+
+            if (is_null($date)) $date = Carbon::now()->toDateString();
+
+            return '<input class="form-control" type="date" name="published_at" value="' . $date . '">';
         });
 
         // todo Form::myRadio('test', 'foo="baz"', 'checked')
@@ -66,13 +71,7 @@ class PostController extends Controller
     public function create()
     {
 
-        $categories = Category::forCreate()->get();
-
-        $cats = [];
-
-        foreach ($categories as $category) {
-            $cats[$category->id] = $category->title;
-        }
+        $cats = $this->categoryTitleAndId();
 
         return view('post.create', compact('cats'));
     }
@@ -80,12 +79,14 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request $request
+     * @param  PostFormRequest $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(PostFormRequest $request)
     {
-        //
+        Post::create($request->all());
+
+        return redirect()->to('admin/post')->with('message', trans('student.success'));
     }
 
     /**
@@ -107,19 +108,29 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+
+        $categories = $this->categoryTitleAndId();
+
+        $category_id = $post->category->id;
+
+        $post->status == 'published' ? $published = true : $published = false;
+
+        return view('post.edit', compact('post', 'categories', 'category_id', 'published'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request $request
+     * @param  PostFormRequest $request
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(PostFormRequest $request, $id)
     {
-        //
+        Post::find($id)->update($request->all());
+
+        return redirect()->to('admin/post')->with('message', 'success');
     }
 
     /**
@@ -130,6 +141,21 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
+
+        return redirect()->to('admin/post')->with('message', 'success delete');
+    }
+
+    private function categoryTitleAndId()
+    {
+        $categories = Category::forCreate()->get();
+
+        $cats = [];
+
+        foreach ($categories as $category) {
+            $cats[$category->id] = $category->title;
+        }
+
+        return $cats;
     }
 }

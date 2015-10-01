@@ -1,8 +1,10 @@
 <nav>
-    <a href="{{url('/')}}">Home</a>
+    <ul>
+    <li><a href="{{url('/')}}">Home</a></li>
     @forelse($categories as $category)
-        <a href="{{url('category', $category->id)}}">{{$category->title}}</a>
+        <li><a href="{{url('category', $category->id)}}">{{$category->title}}</a></li>
     @empty
-        <a>No category</a>
+        <li><a>No category</a></li>
     @endforelse
+    </ul>
 </nav>

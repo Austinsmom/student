@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->enum('status', ['published', 'unpublished', 'draft', 'delete'])->default('unpublished');
             $table->timestamp('published_at');
+            $table->integer('comments_count')->default(0);
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')

@@ -1,6 +1,7 @@
 <?php
 
 use App\Comment;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class PostTableSeeder extends Seeder
@@ -16,11 +17,10 @@ class PostTableSeeder extends Seeder
 
             $faker = \Faker\Factory::create(); // une instance de faker
             for ($i = 0; $i < rand(1, 10); $i++) {
-                $c = new Comment;
 
-                $c->email = $faker->email;
-                $c->content = $faker->paragraph(1);
-                $post->comments()->save($c);
+                $comment = new Comment(['email' => $faker->email, 'content' => $faker->paragraph(1), 'post_id' => $post->id, 'published_at' => Carbon::now()]);
+
+                $post->comments()->save($comment);
             }
 
         });

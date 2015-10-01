@@ -5,15 +5,15 @@
 @section('content')
     <div class="row">
         <div class="col-lg-8">
-            {!! Form::open(['route'=>'admin.post.store', 'files' => true]) !!}
+            {!! Form::open(['route' => ['admin.post.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
             <div class="form-group {{$errors->has('title')? 'has-error' : '' }}">
                 {!! Form::label('title', 'Title:', ['for'=> 'Title'] ) !!}<br>
-                {!! Form::text('title', old('title'), ['class'=>'form-control', 'id' => 'Title']) !!}
+                {!! Form::text('title', $post->title, ['class'=>'form-control', 'id' => 'Title']) !!}
                 {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
             </div>
             <div class="form-group {{$errors->has('content')? 'has-error' : '' }}">
                 {!! Form::label('content', 'Content:' ) !!}<br>
-                {!! Form::textarea('content', old('content')) !!}
+                {!! Form::textarea('content', $post->content) !!}
                 {!! $errors->first('content', '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -21,8 +21,8 @@
             <div class="control-group">
                 <div class="controls">
                     <h3>{{trans('blog.Status')}} </h3>
-                    {{trans('blog.Published')}} {!!Form::radio('status', 'published', false)!!}
-                    {{trans('blog.Unpublished')}} {!!Form::radio('status', 'unpublished', true)!!}
+                    {{trans('blog.Published')}} {!!Form::radio('status', 'published', $published)!!}
+                    {{trans('blog.Unpublished')}} {!!Form::radio('status', 'unpublished', !$published)!!}
                 </div>
             </div>
             <div class="form-group {{$errors->has('published_at')? 'has-error' : '' }}">
@@ -34,7 +34,7 @@
                 <div class="controls">
                     <h3>{{trans('blog.category')}}</h3>
                     <ul>
-                        <li>{!! Form::select('category', $cats, old('cats')) !!}</li>
+                        <li>{!! Form::select('category_id', $categories, $category_id) !!}</li>
                     </ul>
                 </div>
             </div>
