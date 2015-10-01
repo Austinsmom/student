@@ -474,7 +474,7 @@ $model3 = new Model2(new ElasticSearchConnexion);
 add akismet
 
 ```bash
-    php composer require nickurt/laravel-akismet:dev-master
+    composer require nickurt/laravel-akismet:dev-master
 ```
 
 configure into your config/app.php
@@ -489,8 +489,7 @@ configure into your config/app.php
         'Akismet'   => nickurt\Akismet\Facade::class,
 
 ```
-
-And adapter this example into your owner application, i have add this part of code into my service provider (method boot)
+Adapting this example into your owner application, i have add this part of code into my service provider (method boot)
 
 ```php
 
@@ -506,9 +505,9 @@ And adapter this example into your owner application, i have add this part of co
 
 ```
 
+You can publish configuration into app/config like this
 
+```php
+php artisan vendor:publish
 
-
-
-
-
+```
