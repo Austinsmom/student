@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'fetch' => PDO::FETCH_CLASS,
+    'fetch'       => PDO::FETCH_CLASS,
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default'     => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,11 +48,13 @@ return [
 
         'sqlite' => [
             'driver'   => 'sqlite',
-            'database' => storage_path('database.sqlite'),
+            'database' => ':memory:',
+//            'statement' => 'PRAGMA foreign_keys = ON;',
+            //'database' => storage_path('database.sqlite'),
             'prefix'   => '',
         ],
 
-        'mysql' => [
+        'mysql'  => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
             'database'  => env('DB_DATABASE', 'tony'),
@@ -64,7 +66,7 @@ return [
             'strict'    => false,
         ],
 
-        'pgsql' => [
+        'pgsql'  => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),
             'database' => env('DB_DATABASE', 'forge'),
@@ -98,7 +100,7 @@ return [
     |
     */
 
-    'migrations' => 'migrations',
+    'migrations'  => 'migrations',
 
     /*
     |--------------------------------------------------------------------------
@@ -111,7 +113,7 @@ return [
     |
     */
 
-    'redis' => [
+    'redis'       => [
 
         'cluster' => false,
 

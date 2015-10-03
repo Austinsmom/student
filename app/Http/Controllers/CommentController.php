@@ -48,15 +48,6 @@ class CommentController extends Controller
 
         $comment = Comment::create($request->all());
 
-        // service Aksimet checked content and email
-        \Akismet::setCommentContent($request->input('content'))
-            ->setCommentAuthorEmail($request->input('email'));
-
-        if (\Akismet::isSpam()) {
-            $comment->spam = 1;
-            $comment->save();
-        }
-
         return redirect()->back()->with('message', 'thanks for your attention');
 
     }

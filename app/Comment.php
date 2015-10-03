@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Facades\MyHtml;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -10,13 +11,19 @@ class Comment extends Model
         'email',
         'post_id',
         'content',
-        'published_at'
+        'published_at',
+        'spam'
     ];
 
 
     public function post()
     {
         return $this->belongsTo('App\Post');
+    }
+
+    public function setContentAttribute($value)
+    {
+        $this->attributes['content'] = MyHtml::sanitize($value);
     }
 
     public function scopeNoSpam($query)

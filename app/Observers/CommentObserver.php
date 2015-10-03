@@ -3,7 +3,7 @@
 class CommentObserver
 {
 
-    public function saved($comment)
+    public function created($comment)
     {
         $this->addComment($comment);
     }
@@ -15,13 +15,15 @@ class CommentObserver
 
     protected function restoreNumberComment($comment)
     {
-        $comment->post->comments_count = $comment->post->comments->count();
+        $comment->post->comments_count = $comment->post->comments()->noSpam()->count();
         $comment->post->save();
     }
 
     protected function addComment($comment)
     {
-        $comment->post->comments_count++;
-        $comment->post->save();
+        if ($comment->spam != 1) {
+            $comment->post->comments_count++;
+            $comment->post->save();
+        }
     }
 }

@@ -33,42 +33,6 @@ class MyHtmlServiceProvider extends ServiceProvider
 
         });
 
-        // add rules for Form Request
-        Validator::extend('spam_email', function ($attribute, $value, $parameters) {
-
-            \Akismet::setCommentAuthorEmail($value);
-            if (\Akismet::isSpam()) {
-                return false;
-            }
-
-            return true;
-        });
-
-        Validator::extend('spam_content', function ($attribute, $value, $parameters) {
-
-            \Akismet::setCommentContent($value);
-            if (\Akismet::isSpam()) {
-                return false;
-            }
-
-            return true;
-        });
-
-        Validator::extend('spam_author', function ($attribute, $value, $parameters) {
-
-            \Akismet::setCommentAuthorUrl($value);
-            if (\Akismet::isSpam()) {
-                return false;
-            }
-
-            return true;
-        });
-
-        Validator::extend('spam_test', function ($attribute, $value, $parameters) {
-
-           return false;
-        });
-
     }
 
     /**

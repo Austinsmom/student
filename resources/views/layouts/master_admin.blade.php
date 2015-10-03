@@ -19,6 +19,7 @@
         </div>
         <div class="col-lg-4 col-xs-offset-4">
             <blockquote>
+                <h2>{{trans('dashboard.welcome')}}</h2>
                 @if(Session::has('message'))
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif

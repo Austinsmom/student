@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use MyHtml;
 use App\Http\Requests\Request;
 
-
 class CommentFormRequest extends Request
 {
 
@@ -13,7 +12,7 @@ class CommentFormRequest extends Request
     {
 
         return [
-            'spam_test' => 'This :attribute is a test'
+            'content' => 'This :attribute is required'
         ];
 
     }
@@ -35,14 +34,16 @@ class CommentFormRequest extends Request
      */
     public function rules()
     {
-
         $input = $this->all();
 
-        $input['content'] = MyHtml::sanitize($input['content']);
+        // service Aksimet checked content and email
+        \Akismet::setCommentContent($input['content'])
+            ->setCommentAuthorEmail($input['email']);
+
+        $input['spam'] = (\Akismet::isSpam()) ? 1 : 0;
 
         $this->replace($input);
 
-        // todo add spam validation
         return [
             'email'        => 'email|required',
             'content'      => 'required',
@@ -50,6 +51,5 @@ class CommentFormRequest extends Request
             'published_at' => 'regex:/[0-9]{4}\-[0-9]{2}\-[0-9]{2} [0-9]{2}\:[0-9]{2}\:[0-9]{2}/',
         ];
     }
-
 
 }

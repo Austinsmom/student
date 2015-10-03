@@ -23,7 +23,7 @@ class PostController extends Controller
     {
         $this->middleware('auth');
 
-        // helper Form macro
+        // todo marco to extend helper Form
         Form::macro('published', function ($value = null) {
 
             $date = $value;

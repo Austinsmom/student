@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Comment::observe(new CommentObserver);
+
     }
 
     /**

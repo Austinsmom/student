@@ -12,7 +12,7 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         // définit dans le fichier ModelFactory dans le dossier database voir
-        factory(App\User::class, 20)->create();
+        factory(App\User::class, 5)->create();
 
 
         DB::table('users')->insert([

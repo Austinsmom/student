@@ -9,10 +9,10 @@
     <input type="hidden" name="published_at" value="{!! MyHtml::now() !!}"/>
     {!! MyHtml::submit() !!}
 </form>
-@forelse($post->comments as $c)
+@forelse($post->comments()->noSpam()->get() as $c)
     <p>{{$c->content}}
         <br/>date de publication:
-        <small>{{$c->published_at}} is spam {{$c->spam}}</small>
+        <small>{{$c->published_at}}</small>
     </p>
 @empty
     <p>No comment</p>

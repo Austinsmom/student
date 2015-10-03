@@ -76,7 +76,7 @@ class MyHtml
      */
     public function sanitize($input)
     {
-        $test = (substr_count($input, 'http') > 1 || substr_count($input, 'href') > 1 || substr_count($input, 'url') > 1);
+        $test = (substr_count($input, 'http') > 0 || substr_count($input, 'href') > 0 || substr_count($input, 'url') > 0);
 
         if ($test) preg_replace('/[http|href|url]/', '', $input);
 
