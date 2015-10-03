@@ -489,29 +489,14 @@ configure into your config/app.php
         'Akismet'   => nickurt\Akismet\Facade::class,
 
 ```
-Adapting this example into your owner application, i have add this part of code into my service provider (method boot)
 
-```php
-
- Validator::extend('spam_email', function ($attribute, $value, $parameters) {
-
-            \Akismet::setCommentAuthorEmail($value);
-            if (\Akismet::isSpam()) {
-                return false;
-            }
-
-            return true;
-        });
-
-```
-
-You can publish configuration into app/config like this
+Create automatic file (akismet.php) into config directory with this command.
 
 ```php
 php artisan vendor:publish
 
 ```
-into your akismet.php file (config/akismet.php) write your API KEY and url web site
+Put your api key and url blog into akismet.php
 
 ```php
 return [
@@ -520,6 +505,99 @@ return [
 ];
 
 ```
+How protect my comments into process seeds data in application. Direct into form request and method rules i have. Doesn't forget your field spam into assignation mass model Comment...
+
+See method rules CommentFormRequest class
+
+```php
+public function rules()
+    {
+        // all values
+        $input = $this->all();
+
+        // service Aksimet checked content and email
+        \Akismet::setCommentContent($input['content'])
+            ->setCommentAuthorEmail($input['email']);
+
+        // determine a value for spam field
+        $input['spam'] = (\Akismet::isSpam()) ? 1 : 0;
+
+        // add field spam into all fields values for assignation mass (nice!)
+        $this->replace($input);
+
+        return [
+            'email'        => 'email|required',
+            'content'      => 'required',
+            'post_id'      => 'integer',
+            'published_at' => 'regex:/[0-9]{4}\-[0-9]{2}\-[0-9]{2} [0-9]{2}\:[0-9]{2}\:[0-9]{2}/',
+        ];
+    }
+
+#testing
+
+project:
+we wont test CommentObserver class in application but not with all tables and we wont use sqlite to accelerated tests
+
+- first create directory migrations into directory tests Laravel and put your migrations posts and comments (see directory repository)
+- second create file bootstrap.php, just for create file testing.sqlie, sqlitelite need this file to run.
+- modified the phpunit.xml to bootstrap my bootstrap.php
+
+Into my xml file determine you wont use sqlite database just values testing and sqlite:
+
+```xml
+ <php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="CACHE_DRIVER" value="array"/>
+    <env name="SESSION_DRIVER" value="array"/>
+ </php>
+```
+
+## into my CommentObserverTest
+
+- i use a method with annotation @before just above method then this method executed before a test (remember a test is a method into class test)
+
+this part of CommentObserverTest bootstrap environment database sqlite test
+
+```php
+
+ protected $post;
+
+    /**
+     * @before
+     */
+    public function runDatabaseMigrations()
+    {
+//        $this->artisan('migrate');
+
+        $this->artisan('migrate', [
+            '--path' => './tests/migrations',
+        ]);
+
+        $this->post = Post::create(['title' => 'foo', 'comments_count' => 0, 'content'=> '']);
+
+
+        // laravel method TestCase
+        $this->beforeApplicationDestroyed(function () {
+            $this->artisan('migrate:rollback');
+        });
+    }
+
+```
+Now my test time with phpunit is Time: 984 ms
+Have fun !
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

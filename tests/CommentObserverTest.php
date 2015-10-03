@@ -16,14 +16,14 @@ class CommentObserverTest extends TestCase
      */
     public function runDatabaseMigrations()
     {
-        $this->artisan('migrate');
+//        $this->artisan('migrate');
 
-//        $this->artisan('migrate', [
-//            '--database' => 'sqlite',
-//            '--path'     => '../tests/migrations',
-//        ]);
+        $this->artisan('migrate', [
+            '--path' => './tests/migrations',
+        ]);
 
-        $this->post = Post::create(['title' => 'foo', 'comments_count' => 0]);
+        $this->post = Post::create(['title' => 'foo', 'comments_count' => 0, 'content'=> '']);
+
 
         // laravel method TestCase
         $this->beforeApplicationDestroyed(function () {
